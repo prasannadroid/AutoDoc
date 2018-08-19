@@ -1,0 +1,64 @@
+<resources>
+    <string name="app_name">AutoDoc</string>
+    <string name="login">Login</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="phone">Phone</string>
+    <string name="name">Name</string>
+    <string name="user_name">User Name</string>
+    <string name="type">Type</string>
+    <string name="address">Address</string>
+    <string name="register">Register</string>
+    <string name="welcome_to_auto_doc">Welcome To Auto Doc</string>
+    <string name="history">History</string>
+    <string name="job_history">Job History</string>
+    <string name="profile">Profile</string>
+    <string name="err_msg_email">Invalid Username</string>
+    <string name="err_msg_pass">Invalid Password</string>
+    <string name="invalid_input">Invalid input</string>
+
+    <string name="alert_hint_title">Alert Title</string>
+    <string name="alert_hint_description">Alert Description</string>
+    <string name="text_cancel">Cancel</string>
+    <string name="text_ok">Ok</string>
+    <string name="msg_error">Error</string>
+    <string name="msg_contact_service_provider">Please contact your service provider</string>
+    <string name="msg_turn_on_network">Please turn on network connection to continue</string>
+    <string name="text_settings">Settings</string>
+
+    <!--Custom confirmation dialog-->
+    <string name="confirmation_hint_confirm_title">Confirm title</string>
+    <string name="confirmation_hint_confirm_description">Confirmation description</string>
+    <string name="confirmation_cancel_button_text">Cancel</string>
+    <string name="confirmation_confirm_button_text">Confirm</string>
+    <string name="msg_error_code">Error code: </string>
+    <string name="i_agreed_to_the_terms_and_condition">I agree to the terms and conditions. </string>
+    <string name="authenticated">Authenticated </string>
+    <string name="title_activity_home">HomeActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="reporter_name">Repair Name</string>
+    <string name="description">Description</string>
+    <string name="select_form_map">Select From Map</string>
+    <string name="next">Next</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="technicians">Technicians</string>
+
+    <string name="in_progress">In Progress</string>
+    <string name="awaiting">Awaiting</string>
+    <string name="done">Done</string>
+
+    <string name="title_activity_history">HistoryActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="feedback">Feedback</string>
+    <string name="send">Send</string>
+    <string name="confirm">Confirm</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="add_job_confirm_message">Are you sure you want to confirm this job</string>
+
+</resources>
