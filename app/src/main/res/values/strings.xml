@@ -60,5 +60,7 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="add_job_confirm_message">Are you sure you want to confirm this job</string>
+    <string name="success">success</string>
+
 
 </resources>

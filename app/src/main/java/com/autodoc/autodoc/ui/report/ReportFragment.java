@@ -13,6 +13,7 @@ import android.widget.EditText;
 
 import com.autodoc.autodoc.R;
 import com.autodoc.autodoc.api.request.ReportRequest;
+import com.autodoc.autodoc.data.MapData;
 import com.autodoc.autodoc.ui.map.MapsActivity;
 import com.autodoc.autodoc.ui.technician.TechnicianActivity;
 import com.autodoc.autodoc.util.AppUtil;
@@ -20,6 +21,8 @@ import com.autodoc.autodoc.util.AppUtil;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static android.app.Activity.RESULT_OK;
 
 /**
  * Created by ilabs on 8/19/18.
@@ -45,18 +48,22 @@ public class ReportFragment extends Fragment {
     @BindView(R.id.input_layout_reporter_address)
     TextInputLayout addressTextInputLayout;
 
+    private final static int ACTIVITY_RESULT = 123;
+    private ReportRequest reportRequest;
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_report, null);
         ButterKnife.bind(this, view);
-
+        reportRequest = new ReportRequest();
         return view;
     }
 
     @OnClick(R.id.mapButton)
     void openGoogleMap() {
-        getActivity().startActivity(new Intent(getActivity(), MapsActivity.class));
+        getActivity().startActivityForResult(new Intent(getActivity(), MapsActivity.class), ACTIVITY_RESULT);
     }
 
     @OnClick(R.id.nextButton)
@@ -89,17 +96,45 @@ public class ReportFragment extends Fragment {
             return;
         }
 
-        ReportRequest reportRequest = new ReportRequest();
         reportRequest.setRepairName(repairName);
         reportRequest.setJobDescription(description);
-        reportRequest.setAddress("test");
-        reportRequest.setLat("0");
-        reportRequest.setLon("0");
+
+        repairNameNameEditText.setText("");
+        descriptionEditText.setText("");
+        addressEditText.setText("");
 
         Bundle bundle = new Bundle();
         bundle.putSerializable("reportRequest", reportRequest);
         Intent intent = new Intent(getActivity(), TechnicianActivity.class);
         intent.putExtras(bundle);
         getActivity().startActivity(intent);
+    }
+
+    public void updateReport(MapData mapData) {
+
+        if (mapData != null) {
+            reportRequest.setAddress(mapData.getAddress());
+            reportRequest.setLat("" + mapData.getLatitude());
+            reportRequest.setLon("" + mapData.getLongitude());
+            addressEditText.setText(mapData.getAddress());
+        }
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == ACTIVITY_RESULT) {
+            // Make sure the request was successful
+            if (resultCode == RESULT_OK) {
+                Bundle bundle = data.getExtras();
+                if (bundle != null) {
+                    MapData mapData = (MapData) bundle.getSerializable("mapData");
+                    reportRequest.setAddress(mapData.getAddress());
+                    reportRequest.setLat("" + mapData.getLatitude());
+                    reportRequest.setLon("" + mapData.getLongitude());
+                    addressEditText.setText(mapData.getAddress());
+                }
+            }
+        }
     }
 }

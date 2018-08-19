@@ -13,6 +13,7 @@ import android.view.MenuItem;
 
 import com.autodoc.App;
 import com.autodoc.autodoc.R;
+import com.autodoc.autodoc.data.MapData;
 import com.autodoc.autodoc.ui.history.HistoryActivity;
 import com.autodoc.autodoc.ui.login.LoginActivity;
 import com.autodoc.autodoc.ui.profile.ProfileActivity;
@@ -33,6 +34,8 @@ public class HomeActivity extends AppCompatActivity
     @BindView(R.id.nav_view)
     NavigationView navigationView;
 
+    private ReportFragment reportFragment;
+    private final static int ACTIVITY_RESULT = 123;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +71,8 @@ public class HomeActivity extends AppCompatActivity
         int id = item.getItemId();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         if (id == R.id.nav_home) {
-            ft.replace(R.id.main_fragment, new ReportFragment());
+            reportFragment = new ReportFragment();
+            ft.replace(R.id.main_fragment, reportFragment);
         } else if (id == R.id.nav_history) {
             startActivity(new Intent(this, HistoryActivity.class));
         } else if (id == R.id.nav_logout) {
@@ -83,5 +87,23 @@ public class HomeActivity extends AppCompatActivity
         ft.commit();
 
         return true;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        System.out.println(" ///////// ############### " + requestCode);
+
+        if (requestCode == ACTIVITY_RESULT) {
+            // Make sure the request was successful
+            if (resultCode == RESULT_OK) {
+                MapData mapData = (MapData) data.getSerializableExtra("mapData");
+                System.out.println(" ///////// ############### bundle " + mapData);
+
+                if (mapData != null) {
+                    //MapData mapData = (MapData) bundle.getSerializable("mapData");
+                    reportFragment.updateReport(mapData);
+                }
+            }
+        }
     }
 }

@@ -1,9 +1,14 @@
-package lk.hire1.driver.services;
+package com.autodoc.autodoc.service;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 
+import com.autodoc.App;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
@@ -12,9 +17,6 @@ import com.google.android.gms.location.LocationServices;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import lk.hire1.driver.app.App;
-import lk.hire1.driver.rest.models.AppSession;
 
 public class LocationTracking implements GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener, LocationListener {
@@ -30,6 +32,7 @@ public class LocationTracking implements GoogleApiClient.ConnectionCallbacks,
     private boolean mNeedSaveData;
     private int locationRequestAccuracyMode = LocationRequest.PRIORITY_HIGH_ACCURACY;
     private static LocationTracking locationTracking;
+    static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 123;
 
     private LocationTracking(Context context, int accuracy) {
         locationRequestAccuracyMode = accuracy;
@@ -42,7 +45,7 @@ public class LocationTracking implements GoogleApiClient.ConnectionCallbacks,
         if (locationTracking != null) {
             return locationTracking;
         } else {
-            return locationTracking = new LocationTracking(App.getApp().getApplicationContext(), LocationRequest.PRIORITY_HIGH_ACCURACY);
+            return locationTracking = new LocationTracking(App.getInstance().getApplicationContext(), LocationRequest.PRIORITY_HIGH_ACCURACY);
 
         }
     }
@@ -86,28 +89,6 @@ public class LocationTracking implements GoogleApiClient.ConnectionCallbacks,
 
             mRequestingLocationUpdates = false;
         }
-    }
-
-    public void restartLocationUpdates(LocationInterval interval) {
-
-        if (mGoogleApiClient.isConnected()) {
-            LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
-            mRequestingLocationUpdates = false;
-        }
-
-        mUpdateInterval = interval;
-        if (mGoogleApiClient.isConnected() && !mRequestingLocationUpdates) {
-            LocationServices.FusedLocationApi.requestLocationUpdates(
-                    mGoogleApiClient, createLocationRequest(interval), this);
-            mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-            if (mLastLocation != null) {
-                sendLocation(mLastLocation);
-            }
-            mRequestingLocationUpdates = true;
-        } else {
-            mGoogleApiClient.connect();
-        }
-
     }
 
     public void clearSavedData() {

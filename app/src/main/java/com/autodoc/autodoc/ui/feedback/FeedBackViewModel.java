@@ -33,7 +33,7 @@ public class FeedBackViewModel extends ViewModel {
                 if (successResponseResponse != null && successResponseResponse.body() != null) {
                     if (successResponseResponse.body().success) {
                         final AlertDialog dialog = new AlertDialog.Builder(context).create();
-                        AppUtil.standardAlert(dialog, context.getString(R.string.msg_error), successResponseResponse.body().message, v -> {
+                        AppUtil.standardAlert(dialog, context.getString(R.string.success), successResponseResponse.body().message, v -> {
                                     dialog.dismiss();
                                     responseMutableLiveData.setValue(successResponseResponse.body().success);
                                 },

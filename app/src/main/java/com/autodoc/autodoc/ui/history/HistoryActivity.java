@@ -55,13 +55,13 @@ public class HistoryActivity extends AppCompatActivity implements OnItemClickLis
     @Override
     public void onItemClick(int position, Object data) {
         JobResponse jobResponse = (JobResponse) data;
-        //if (jobResponse.getStatus().equals(getString(R.string.done))) {
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("technicianId", jobResponse.getId());
-        Intent intent = new Intent(this, FeedBackActivity.class);
-        intent.putExtras(bundle);
-        startActivity(intent);
-        // }
+        if (jobResponse.getStatus().equals(getString(R.string.done))) {
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("technicianId", jobResponse.getId());
+            Intent intent = new Intent(this, FeedBackActivity.class);
+            intent.putExtras(bundle);
+            startActivity(intent);
+        }
 
     }
 

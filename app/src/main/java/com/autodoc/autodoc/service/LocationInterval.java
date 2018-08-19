@@ -1,4 +1,4 @@
-package lk.hire1.driver.services;
+package com.autodoc.autodoc.service;
 
 public enum LocationInterval {
     HALF_SECOND(500, 250),
