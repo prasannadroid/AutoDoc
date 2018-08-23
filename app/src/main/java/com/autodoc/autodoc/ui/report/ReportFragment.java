@@ -6,9 +6,13 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.autodoc.autodoc.R;
@@ -17,6 +21,7 @@ import com.autodoc.autodoc.data.MapData;
 import com.autodoc.autodoc.ui.map.MapsActivity;
 import com.autodoc.autodoc.ui.technician.TechnicianActivity;
 import com.autodoc.autodoc.util.AppUtil;
+import com.autodoc.autodoc.util.MyTextWatcher;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -48,9 +53,12 @@ public class ReportFragment extends Fragment {
     @BindView(R.id.input_layout_reporter_address)
     TextInputLayout addressTextInputLayout;
 
+    @BindView(R.id.typeButton)
+    Button typeButton;
+
     private final static int ACTIVITY_RESULT = 123;
     private ReportRequest reportRequest;
-
+    private String seletedType;
 
     @Nullable
     @Override
@@ -58,6 +66,11 @@ public class ReportFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_report, null);
         ButterKnife.bind(this, view);
         reportRequest = new ReportRequest();
+
+        repairNameNameEditText.addTextChangedListener(new MyTextWatcher(repairNameTextInputLayout, getString(R.string.invalid_input)));
+        descriptionEditText.addTextChangedListener(new MyTextWatcher(descriptionTextInputLayout, getString(R.string.invalid_input)));
+        addressEditText.addTextChangedListener(new MyTextWatcher(addressTextInputLayout, getString(R.string.invalid_input)));
+
         return view;
     }
 
@@ -96,18 +109,35 @@ public class ReportFragment extends Fragment {
             return;
         }
 
+        if (TextUtils.isEmpty(seletedType)) {
+            final AlertDialog dialog = new AlertDialog.Builder(getActivity()).create();
+            AppUtil.standardAlert(dialog, getActivity().getString(R.string.msg_error), getActivity().getString(R.string.please_select_technician_type), v -> {
+                        dialog.dismiss();
+                    },
+                    getActivity().getResources().getString(R.string.text_ok));
+            return;
+        }
+
         reportRequest.setRepairName(repairName);
         reportRequest.setJobDescription(description);
-
-        repairNameNameEditText.setText("");
-        descriptionEditText.setText("");
-        addressEditText.setText("");
+        reportRequest.setType(seletedType);
 
         Bundle bundle = new Bundle();
         bundle.putSerializable("reportRequest", reportRequest);
         Intent intent = new Intent(getActivity(), TechnicianActivity.class);
         intent.putExtras(bundle);
         getActivity().startActivity(intent);
+
+        repairNameNameEditText.setText("");
+        descriptionEditText.setText("");
+        addressEditText.setText("");
+        typeButton.setText(getString(R.string.technician_type));
+        seletedType = null;
+
+        repairNameTextInputLayout.setErrorEnabled(false);
+        descriptionTextInputLayout.setErrorEnabled(false);
+        addressTextInputLayout.setErrorEnabled(false);
+
     }
 
     public void updateReport(MapData mapData) {
@@ -136,5 +166,21 @@ public class ReportFragment extends Fragment {
                 }
             }
         }
+    }
+
+    @OnClick(R.id.typeButton)
+    void initTypeDialog() {
+        String[] myResArray = getResources().getStringArray(R.array.typeArray);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(getString(R.string.type));
+        builder.setItems(myResArray, (dialogInterface, position) -> {
+            seletedType = myResArray[position];
+            typeButton.setText(seletedType);
+            dialogInterface.dismiss();
+
+        });
+
+        builder.show();
     }
 }

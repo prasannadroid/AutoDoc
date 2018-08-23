@@ -53,7 +53,7 @@ public class TechnicianActivity extends AppCompatActivity implements OnItemClick
     }
 
     private void getAllTechnicians() {
-        technicianViewModel.getAllTechnicians(this).observe(this, technicianResponseList -> {
+        technicianViewModel.getAllTechnicians(this, reportRequest.getType()).observe(this, technicianResponseList -> {
             if (technicianResponseList != null) {
                 TechnicianAdapter technicianAdapter = new TechnicianAdapter(TechnicianActivity.this, technicianResponseList, TechnicianActivity.this);
                 LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
@@ -77,8 +77,6 @@ public class TechnicianActivity extends AppCompatActivity implements OnItemClick
             technicianViewModel.postJob(this, reportRequest).observe(this, isSuccess -> {
                 if (isSuccess.booleanValue()) {
                     startActivity(new Intent(TechnicianActivity.this, HistoryActivity.class));
-
-
                 }
             });
         }, view -> {

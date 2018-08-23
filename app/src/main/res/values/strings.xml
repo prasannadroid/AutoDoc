@@ -61,6 +61,15 @@
     <string name="no">No</string>
     <string name="add_job_confirm_message">Are you sure you want to confirm this job</string>
     <string name="success">success</string>
+    <string name="technician_type">TECHNICIAN TYPE</string>
+    <string name="please_select_technician_type">Please select technician type</string>
 
+    <array name="typeArray">
+        <item>Battery</item>
+        <item>Tire</item>
+        <item>Painting</item>
+        <item>Engine Repairing</item>
+        <item>Air Condition</item>
+    </array>
 
 </resources>

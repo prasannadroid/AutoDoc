@@ -25,7 +25,7 @@ import retrofit2.Response;
 
 public class TechnicianViewModel extends ViewModel {
 
-    public MutableLiveData<List<TechnicianResponse>> getAllTechnicians(Context context) {
+    public MutableLiveData<List<TechnicianResponse>> getAllTechnicians(Context context,String type) {
 
         final MutableLiveData<List<TechnicianResponse>> responseMutableLiveData = new MutableLiveData<>();
         Dialog dialog = AppUtil.showProgress(context);
@@ -67,7 +67,7 @@ public class TechnicianViewModel extends ViewModel {
             public void serviceComplete() {
                 dialog.dismiss();
             }
-        }).callServiceRXWay();
+        },type).callServiceRXWay();
 
         return responseMutableLiveData;
     }

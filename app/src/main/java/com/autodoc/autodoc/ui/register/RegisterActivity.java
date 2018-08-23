@@ -9,12 +9,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.EditText;
 
-import com.autodoc.App;
 import com.autodoc.autodoc.R;
 import com.autodoc.autodoc.api.request.NewUserRequest;
 import com.autodoc.autodoc.ui.login.LoginActivity;
-import com.autodoc.autodoc.ui.home.HomeActivity;
 import com.autodoc.autodoc.util.AppUtil;
+import com.autodoc.autodoc.util.MyTextWatcher;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -71,6 +70,13 @@ public class RegisterActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(getString(R.string.register));
 
         registerViewModel = ViewModelProviders.of(this).get(RegisterViewModel.class);
+
+        userNameEditText.addTextChangedListener(new MyTextWatcher(userNameTextInputLayout, getString(R.string.invalid_input)));
+        passwordEditText.addTextChangedListener(new MyTextWatcher(passwordTextInputLayout, getString(R.string.invalid_input)));
+        nameNameEditText.addTextChangedListener(new MyTextWatcher(nameTextInputLayout, getString(R.string.invalid_input)));
+        addressEditText.addTextChangedListener(new MyTextWatcher(addressTextInputLayout, getString(R.string.invalid_input)));
+        phoneEditText.addTextChangedListener(new MyTextWatcher(phoneTextInputLayout, getString(R.string.invalid_input)));
+
     }
 
     @OnClick(R.id.registerButton)
@@ -127,6 +133,7 @@ public class RegisterActivity extends AppCompatActivity {
         registerViewModel.callRegisterRx(this, newUserRequest).observe(this, success -> {
             if (success.booleanValue()) {
                 startActivity(new Intent(this, LoginActivity.class));
+                finish();
             }
         });
 

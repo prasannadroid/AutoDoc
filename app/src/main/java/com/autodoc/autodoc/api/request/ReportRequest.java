@@ -17,6 +17,7 @@ public class ReportRequest implements Serializable {
     private String jobDescription;
     private String lat;
     private String lon;
+    private String type;
 
     public String getAddress() {
         return address;
@@ -72,5 +73,13 @@ public class ReportRequest implements Serializable {
 
     public void setRepairName(String repairName) {
         this.repairName = repairName;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getType() {
+        return type;
     }
 }

@@ -61,4 +61,13 @@
         android:layout_height="1dp"
         android:layout_below="@+id/status"
         android:background="@color/colorTextColor" />
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        style="?attr/ratingBarStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/address"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="10dp" />
 </RelativeLayout>

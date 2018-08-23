@@ -20,6 +20,7 @@ public class TechnicianResponse {
     private String address;
     private String type;
     private boolean isTechnician;
+    private float rating;
 
     public List<JobResponse> getJobResponseList() {
         return jobResponseList;
@@ -83,5 +84,13 @@ public class TechnicianResponse {
 
     public void setTechnician(boolean technician) {
         isTechnician = technician;
+    }
+
+    public float getRating() {
+        return rating;
+    }
+
+    public void setRating(float rating) {
+        this.rating = rating;
     }
 }

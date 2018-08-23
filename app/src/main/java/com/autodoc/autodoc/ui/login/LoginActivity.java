@@ -12,9 +12,9 @@ import android.widget.EditText;
 import com.autodoc.App;
 import com.autodoc.autodoc.R;
 import com.autodoc.autodoc.ui.home.HomeActivity;
-import com.autodoc.autodoc.ui.profile.ProfileActivity;
 import com.autodoc.autodoc.ui.register.RegisterActivity;
 import com.autodoc.autodoc.util.AppUtil;
+import com.autodoc.autodoc.util.MyTextWatcher;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -57,6 +57,10 @@ public class LoginActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(getString(R.string.login));
 
         loginViewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
+
+        userNameEditText.addTextChangedListener(new MyTextWatcher(userNameTextInputLayout, getString(R.string.err_msg_email)));
+        passwordEditText.addTextChangedListener(new MyTextWatcher(passwordTextInputLayout, getString(R.string.err_msg_pass)));
+
     }
 
     @OnClick(R.id.loginButton)
@@ -82,6 +86,7 @@ public class LoginActivity extends AppCompatActivity {
     @OnClick(R.id.registerButtonButton)
     void navigateRegister() {
         startActivity(new Intent(this, RegisterActivity.class));
+        finish();
 
     }
 

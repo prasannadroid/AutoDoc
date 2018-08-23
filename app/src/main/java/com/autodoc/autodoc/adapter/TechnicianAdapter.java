@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.autodoc.autodoc.R;
@@ -48,22 +49,10 @@ public class TechnicianAdapter extends RecyclerView.Adapter<TechnicianAdapter.My
         holder.phone.setText(technicianResponse.getPhone());
         holder.type.setText(technicianResponse.getType());
         holder.address.setText(technicianResponse.getAddress());
+        holder.ratingBar.setRating(technicianResponse.getRating());
 
-        /*if (technicianResponse.getJobResponseList() != null && technicianResponse.getJobResponseList().size() > 0) {
-            JobResponse jobResponse = technicianResponse.getJobResponseList().get(0);
-
-            if (jobResponse.getStatus().equals(context.getString(R.string.done))) {
-                holder.status.setBackground(context.getDrawable(R.drawable.shape_status_done));
-            } else if (jobResponse.getStatus().equals(context.getString(R.string.awaiting))) {
-                holder.status.setBackground(context.getDrawable(R.drawable.shape_status_awaiting));
-            } else if (jobResponse.getStatus().equals(context.getString(R.string.in_progress))) {
-                holder.status.setBackground(context.getDrawable(R.drawable.shape_status_inprogress));
-            }
-
-            holder.status.setText(jobResponse.getStatus());
-        } else {*/
-            holder.status.setVisibility(View.GONE);
-        //}
+        holder.status.setVisibility(View.GONE);
+      
     }
 
     @Override
@@ -88,6 +77,8 @@ public class TechnicianAdapter extends RecyclerView.Adapter<TechnicianAdapter.My
         @BindView(R.id.status)
         TextView status;
 
+        @BindView(R.id.ratingBar)
+        RatingBar ratingBar;
 
         public MyViewHolder(View view) {
             super(view);
