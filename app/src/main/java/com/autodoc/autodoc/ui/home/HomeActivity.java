@@ -91,13 +91,10 @@ public class HomeActivity extends AppCompatActivity
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        System.out.println(" ///////// ############### " + requestCode);
-
         if (requestCode == ACTIVITY_RESULT) {
             // Make sure the request was successful
             if (resultCode == RESULT_OK) {
                 MapData mapData = (MapData) data.getSerializableExtra("mapData");
-                System.out.println(" ///////// ############### bundle " + mapData);
 
                 if (mapData != null) {
                     //MapData mapData = (MapData) bundle.getSerializable("mapData");

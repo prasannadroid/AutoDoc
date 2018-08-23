@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#3f8cb5</color>
     <color name="colorPrimaryDark">#306d9f</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#3f8cb5</color>
     <color name="colorTextColor">#5c5c5c</color>
 
     <color name="awaiting">#41acde</color>
@@ -11,4 +11,18 @@
 
     <color name="black_overlay">#66000000</color>
 
+    <color name="edittext_hintcolor_login">#636363</color>
+    <color name="pasword_edit_text_floating_color">#4ea2e2</color>
+
+
+
+    <!--Text colors-->
+    <color name="tv_color_dark_gray">#636363</color>
+    <color name="tv_color_start_shift_inactive">#32653f3f</color>
+    <color name="tv_color_start_shift_active">#636363</color>
+
+    <!--Button colors-->
+    <color name="bg_circle_button_normal">#4ea2e2</color>
+    <color name="bg_start_shift_button_active_color">#ff6666</color>
+    <color name="bg_start_shift_button_inactive_color">#13000000</color>
 </resources>

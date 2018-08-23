@@ -18,6 +18,7 @@ import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  * Created by ilabs on 8/17/18.
@@ -33,7 +34,7 @@ public interface APIService {
     Observable<Response<SuccessResponse>> register(@Body NewUserRequest newUserRequest);
 
     @GET("technicians")
-    Observable<Response<List<TechnicianResponse>>> getTechnicians(@Header("Authorization") String authorization);
+    Observable<Response<List<TechnicianResponse>>> getTechnicians(@Header("Authorization") String authorization, @Query("type") String type);
 
     @POST("jobs/")
     Observable<Response<SuccessResponse>> postJob(@Header("Authorization") String authorization, @Body ReportRequest reportRequest);

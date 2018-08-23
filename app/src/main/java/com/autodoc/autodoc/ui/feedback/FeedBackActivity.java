@@ -1,17 +1,16 @@
 package com.autodoc.autodoc.ui.feedback;
 
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.widget.EditText;
 
 import com.autodoc.autodoc.R;
 import com.autodoc.autodoc.api.request.FeedBackRequest;
-import com.autodoc.autodoc.ui.login.LoginActivity;
 import com.autodoc.autodoc.util.AppUtil;
+import com.autodoc.autodoc.util.MyTextWatcher;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -47,7 +46,7 @@ public class FeedBackActivity extends AppCompatActivity {
         }
 
         feedBackViewModel = ViewModelProviders.of(this).get(FeedBackViewModel.class);
-
+        feedbackEditText.addTextChangedListener(new MyTextWatcher(feedbackTextInputLayout, getString(R.string.invalid_input)));
     }
 
     @OnClick(R.id.sendFeedback)
